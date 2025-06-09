@@ -60,7 +60,7 @@
 
 	<body class="min-h-screen bg-base-100 transition-colors duration-300">
 		<!-- Navigation -->
-		<div class="navbar bg-base-100 fixed top-0 z-50 shadow-lg">
+		<div class="navbar bg-base-100 fixed top-0 z-50 shadow-lg w-screen">
 			<div class="navbar-start lg:hidden">
 				<div class="dropdown">
 					<div tabindex="0" role="button" class="btn btn-ghost">
@@ -128,29 +128,10 @@
 					<h1 class="text-5xl font-bold">Welcome to SuperWise</h1>
 					<p class="py-6">Your AI-powered learning companion that adapts to your unique learning style and helps you
 						achieve your educational goals.</p>
-					<a href="#contact" class="btn btn-primary">Get Started</a>
-				</div>
-			</div>
-
-			<!-- Scroll Indicator -->
-			<div
-					class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-				<span class="text-base-content/60 text-sm">Scroll to explore</span>
-				<span class="material-symbols-rounded text-base-content/60">expand_more</span>
-			</div>
-		</section>
-
-		<!-- Hero Section Mobile -->
-		<section class="hero min-h-screen bg-base-100 relative lg:hidden">
-			<div class="hero-content text-center">
-				<div class="max-w-md">
-					<img src="img/logo/logo_text_vertical_light.svg" alt="SuperWise Logo" class="mx-auto h-32 dark:hidden mb-8">
-					<img src="img/logo/logo_text_vertical_dark.svg" alt="SuperWise Logo"
-							class="mx-auto h-32 hidden dark:block mb-8">
-					<h1 class="text-5xl font-bold">Welcome to SuperWise</h1>
-					<p class="py-6">Your AI-powered learning companion that adapts to your unique learning style and helps you
-						achieve your educational goals.</p>
-					<a href="#contact" class="btn btn-primary">Get Started</a>
+					<a href="#contact" class="btn btn-primary flex items-center gap-2">
+						<span class="material-symbols-rounded">rocket_launch</span>
+						Get Started
+					</a>
 				</div>
 			</div>
 
@@ -190,7 +171,7 @@
 		</section>
 
 		<!-- Features Section -->
-		<section id="features" class="py-20 bg-base-100">
+		<section id="features" class="py-20 bg-base-100" data-parent-section="about">
 			<div class="container mx-auto px-4">
 				<h2 class="text-4xl font-bold text-center mb-12">Features</h2>
 				<div class="grid md:grid-cols-3 gap-8">
@@ -225,7 +206,7 @@
 		</section>
 
 		<!-- App Preview Section -->
-		<section id="app-preview" class="py-20 bg-base-200">
+		<section id="app-preview" class="py-20 bg-base-200" data-parent-section="about">
 			<div class="container mx-auto px-4">
 				<h2 class="text-4xl font-bold text-center mb-12">App Preview</h2>
 				<div class="carousel">
@@ -263,7 +244,7 @@
 		</section>
 
 		<!-- How it Works Section -->
-		<section id="how-it-works" class="py-20 bg-base-100">
+		<section id="how-it-works" class="py-20 bg-base-100" data-parent-section="about">
 			<div class="container mx-auto px-4">
 				<h2 class="text-4xl font-bold text-center mb-12">How It Works</h2>
 				<div class="grid md:grid-cols-3 gap-8">
@@ -534,6 +515,39 @@
 						prevSlide();
 					}
 				}
+			});
+		</script>
+
+		<!-- Section Highlighting Script -->
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const sections = document.querySelectorAll('section[id]');
+				const aboutSection = document.getElementById('about');
+
+				function updateActiveSection() {
+					const scrollPosition = window.scrollY;
+
+					sections.forEach(section => {
+						const sectionTop = section.offsetTop - 100;
+						const sectionBottom = sectionTop + section.offsetHeight;
+
+						if(scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+							section.classList.add('active');
+
+							// Check if we're in About, Features, App Preview, or How it Works
+							if(['about', 'features', 'app-preview', 'how-it-works'].includes(section.id)) {
+								aboutSection.classList.add('active');
+							} else {
+								aboutSection.classList.remove('active');
+							}
+						} else {
+							section.classList.remove('active');
+						}
+					});
+				}
+
+				window.addEventListener('scroll', updateActiveSection);
+				updateActiveSection(); // Initial check
 			});
 		</script>
 	</body>

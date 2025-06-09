@@ -583,15 +583,27 @@ img[alt='SuperWise Logo'] {
 /* Mobile Menu Styles */
 @media (max-width: 1024px) {
 	.navbar-center {
-		@apply justify-start;
+		@apply justify-center;
 	}
 
 	.navbar-center .btn-ghost {
-		@apply px-1;
+		@apply px-2;
 	}
 
 	.navbar-center .btn-ghost img {
-		@apply h-6;
+		@apply h-8;
+	}
+
+	.hero-content {
+		@apply px-4;
+	}
+
+	.section-content {
+		@apply px-4;
+	}
+
+	.container {
+		@apply px-4;
 	}
 }
 
@@ -623,30 +635,20 @@ section[id] {
 	scroll-margin-top: 5rem;
 }
 
-/* Highlight the About section when any of its subsections are active */
-section[id='about']:target,
-section[id='features']:target ~ section[id='about'],
-section[id='how-it-works']:target ~ section[id='about'] {
+/* Highlight the About section when in About, Features, App Preview, or How it Works sections */
+section[id='about'].active,
+section[id='features'].active ~ section[id='about'],
+section[id='app-preview'].active ~ section[id='about'],
+section[id='how-it-works'].active ~ section[id='about'] {
 	@apply relative;
 }
 
-section[id='about']:target::before,
-section[id='features']:target ~ section[id='about']::before,
-section[id='how-it-works']:target ~ section[id='about']::before {
+section[id='about'].active::before,
+section[id='features'].active ~ section[id='about']::before,
+section[id='app-preview'].active ~ section[id='about']::before,
+section[id='how-it-works'].active ~ section[id='about']::before {
 	content: '';
 	@apply absolute left-0 top-0 w-1 h-full bg-primary;
-}
-
-/* Highlight the active subsection */
-section[id='features']:target,
-section[id='how-it-works']:target {
-	@apply relative;
-}
-
-section[id='features']:target::before,
-section[id='how-it-works']:target::before {
-	content: '';
-	@apply absolute left-0 top-0 w-1 h-full bg-primary/50;
 }
 
 /* Dropdown Menu Styles */
@@ -668,4 +670,14 @@ section[id='how-it-works']:target::before {
 
 .menu-sm details ul {
 	@apply mt-1;
+}
+
+/* Theme Toggle Button Fixes */
+.btn-circle .material-symbols-rounded {
+	@apply flex items-center justify-center w-full h-full text-xl;
+}
+
+/* Ensure proper centering for all sections */
+.section-content {
+	@apply mx-auto max-w-7xl;
 }
