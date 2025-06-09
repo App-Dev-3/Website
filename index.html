@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>SuperWise - AI-Powered Learning Platform</title>
+		<meta name="description"
+				content="SuperWise is an AI-powered learning platform that helps students learn more effectively and efficiently.">
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/svg+xml" href="img/logo/logo_light.svg" media="(prefers-color-scheme: light)">
+		<link rel="icon" type="image/svg+xml" href="img/logo/logo_dark.svg" media="(prefers-color-scheme: dark)">
+
+		<!-- DaisyUI and Tailwind -->
+		<link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet"
+				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+		<!-- Custom styles -->
+		<link href="styles.css" rel="stylesheet">
+
+		<!-- Theme switcher script -->
+		<script>
+			// Check for saved theme preference or use system preference
+			const theme = (() => {
+				if(typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if(window.matchMedia('(prefers-color-scheme: dark)')
+					.matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+
+			// Apply theme on load
+			if(theme === 'dark') {
+				document.documentElement.setAttribute('data-theme', 'dark');
+				document.querySelector('link[href*="logo_light.svg"]')
+					.setAttribute('href', 'img/logo/logo_dark.svg');
+			}
+
+			// Theme toggle function
+			window.toggleTheme = function() {
+				const element = document.documentElement;
+				const isDark = element.getAttribute('data-theme') === 'dark';
+				const newTheme = isDark ? 'light' : 'dark';
+
+				element.setAttribute('data-theme', newTheme);
+				localStorage.setItem('theme', newTheme);
+
+				// Update favicon
+				const favicon = document.querySelector('link[href*="logo_"]');
+				favicon.setAttribute('href', `img/logo/logo_${newTheme}.svg`);
+			}
+		</script>
+	</head>
+
+	<body class="min-h-screen bg-base-100 transition-colors duration-300">
+		<!-- Navigation -->
+		<div class="navbar bg-base-100 fixed top-0 z-50 shadow-lg">
+			<div class="navbar-start lg:hidden">
+				<div class="dropdown">
+					<div tabindex="0" role="button" class="btn btn-ghost">
+						<span class="material-symbols-rounded">menu</span>
+					</div>
+					<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+						<li>
+							<details>
+								<summary class="flex items-center gap-2">
+									<span class="material-symbols-rounded">info</span>
+									About
+								</summary>
+								<ul>
+									<li><a href="#about" class="flex items-center gap-2"><span
+													class="material-symbols-rounded">info</span>About</a></li>
+									<li><a href="#pricing" class="flex items-center gap-2"><span
+													class="material-symbols-rounded">payments</span>Pricing</a></li>
+									<li><a href="#team" class="flex items-center gap-2"><span
+													class="material-symbols-rounded">group</span>Team</a></li>
+									<li><a href="#contact" class="flex items-center gap-2"><span
+													class="material-symbols-rounded">mail</span>Contact</a></li>
+								</ul>
+				</div>
+			</div>
+			<div class="navbar-center flex-1">
+				<a href="/" class="btn btn-ghost px-2">
+					<img src="img/logo/logo_light.svg" alt="SuperWise Logo" class="h-8 dark:hidden">
+					<img src="img/logo/logo_dark.svg" alt="SuperWise Logo" class="h-8 hidden dark:block">
+				</a>
+				<div class="hidden lg:flex">
+					<ul class="menu menu-horizontal px-1">
+						<li><a href="#about" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">info</span>About</a></li>
+						<li><a href="#pricing" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">payments</span>Pricing</a></li>
+						<li><a href="#team" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">group</span>Team</a></li>
+						<li><a href="#contact" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">mail</span>Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="navbar-end gap-2">
+				<button onclick="toggleTheme()" class="btn btn-ghost btn-circle swap swap-rotate">
+					<span class="material-symbols-rounded swap-on">dark_mode</span>
+					<span class="material-symbols-rounded swap-off">light_mode</span>
+				</button>
+				<a href="#contact" class="btn btn-primary hidden sm:flex items-center gap-2">
+					<span class="material-symbols-rounded">rocket_launch</span>
+					Get Started
+				</a>
+				<a href="#contact" class="btn btn-primary btn-circle sm:hidden">
+					<span class="material-symbols-rounded">rocket_launch</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- Hero Section -->
+		<section class="hero min-h-screen bg-base-100 relative">
+			<div class="hero-content text-center">
+				<div class="max-w-md">
+					<img src="img/logo/logo_text_vertical_light.svg" alt="SuperWise Logo" class="mx-auto h-32 dark:hidden mb-8">
+					<img src="img/logo/logo_text_vertical_dark.svg" alt="SuperWise Logo"
+							class="mx-auto h-32 hidden dark:block mb-8">
+					<h1 class="text-5xl font-bold">Welcome to SuperWise</h1>
+					<p class="py-6">Your AI-powered learning companion that adapts to your unique learning style and helps you
+						achieve your educational goals.</p>
+					<a href="#contact" class="btn btn-primary">Get Started</a>
+				</div>
+			</div>
+
+			<!-- Scroll Indicator -->
+			<div
+					class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+				<span class="text-base-content/60 text-sm">Scroll to explore</span>
+				<span class="material-symbols-rounded text-base-content/60">expand_more</span>
+			</div>
+		</section>
+
+		<!-- Hero Section Mobile -->
+		<section class="hero min-h-screen bg-base-100 relative lg:hidden">
+			<div class="hero-content text-center">
+				<div class="max-w-md">
+					<img src="img/logo/logo_text_vertical_light.svg" alt="SuperWise Logo" class="mx-auto h-32 dark:hidden mb-8">
+					<img src="img/logo/logo_text_vertical_dark.svg" alt="SuperWise Logo"
+							class="mx-auto h-32 hidden dark:block mb-8">
+					<h1 class="text-5xl font-bold">Welcome to SuperWise</h1>
+					<p class="py-6">Your AI-powered learning companion that adapts to your unique learning style and helps you
+						achieve your educational goals.</p>
+					<a href="#contact" class="btn btn-primary">Get Started</a>
+				</div>
+			</div>
+
+			<!-- Scroll Indicator -->
+			<div
+					class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+				<span class="text-base-content/60 text-sm">Scroll to explore</span>
+				<span class="material-symbols-rounded text-base-content/60">expand_more</span>
+			</div>
+		</section>
+
+		<!-- About Section -->
+		<section id="about" class="py-20 bg-base-200">
+			<div class="container mx-auto px-4">
+				<h2 class="text-4xl font-bold text-center mb-12">About SuperWise</h2>
+				<div class="grid md:grid-cols-2 gap-8 items-center">
+					<div class="space-y-4">
+						<p class="text-lg">SuperWise was born from a Media Lab 2025 project, created by a team of six passionate
+							developers and designers. Our mission is to revolutionize how students find their thesis supervisors.</p>
+						<p class="text-lg">We understand the challenges students face when searching for the right supervisor and
+							the overwhelming number of requests supervisors receive. That's why we created an AI-powered matching
+							system that connects students with supervisors based on research interests and expertise.</p>
+					</div>
+					<div class="card bg-base-200">
+						<div class="card-body">
+							<h3 class="card-title">Our Impact</h3>
+							<ul class="list-disc list-inside space-y-2">
+								<li>Streamlined supervisor search process</li>
+								<li>AI-powered matching based on research interests</li>
+								<li>Reduced administrative burden for supervisors</li>
+								<li>Better student-supervisor compatibility</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Features Section -->
+		<section id="features" class="py-20 bg-base-100">
+			<div class="container mx-auto px-4">
+				<h2 class="text-4xl font-bold text-center mb-12">Features</h2>
+				<div class="grid md:grid-cols-3 gap-8">
+					<div class="card bg-base-200">
+						<div class="card-body">
+							<span class="material-symbols-rounded text-4xl text-primary mb-4">psychology</span>
+							<h3 class="card-title">AI-Powered Matching</h3>
+							<p>Our advanced AI algorithm matches students with supervisors based on research interests and
+								expertise.
+							</p>
+						</div>
+					</div>
+					<div class="card bg-base-200">
+						<div class="card-body">
+							<span class="material-symbols-rounded text-4xl text-primary mb-4">search</span>
+							<h3 class="card-title">Smart Search</h3>
+							<p>Find the perfect supervisor with our intelligent search system that understands your research
+								needs.
+							</p>
+						</div>
+					</div>
+					<div class="card bg-base-200">
+						<div class="card-body">
+							<span class="material-symbols-rounded text-4xl text-primary mb-4">analytics</span>
+							<h3 class="card-title">Analytics Dashboard</h3>
+							<p>Track your progress and get insights into your research journey with our comprehensive dashboard.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- App Preview Section -->
+		<section id="app-preview" class="py-20 bg-base-200">
+			<div class="container mx-auto px-4">
+				<h2 class="text-4xl font-bold text-center mb-12">App Preview</h2>
+				<div class="carousel">
+					<div class="carousel-item">
+						<img src="img/app-preview/dashboard.png" alt="SuperWise Dashboard" class="w-full h-full object-cover">
+					</div>
+					<div class="carousel-item hidden">
+						<img src="img/app-preview/matching.png" alt="SuperWise Matching" class="w-full h-full object-cover">
+					</div>
+					<div class="carousel-item hidden">
+						<img src="img/app-preview/profile.png" alt="SuperWise Profile" class="w-full h-full object-cover">
+					</div>
+					<div class="carousel-item hidden">
+						<video autoplay loop muted playsinline class="w-full h-full object-cover">
+							<source src="img/app-preview/demo.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+					</div>
+					<div class="carousel-controls">
+						<button class="carousel-prev">
+							<span class="material-symbols-rounded">chevron_left</span>
+						</button>
+						<button class="carousel-next">
+							<span class="material-symbols-rounded">chevron_right</span>
+						</button>
+					</div>
+					<div class="carousel-indicators">
+						<button class="carousel-indicator active"></button>
+						<button class="carousel-indicator"></button>
+						<button class="carousel-indicator"></button>
+						<button class="carousel-indicator"></button>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- How it Works Section -->
+		<section id="how-it-works" class="py-20 bg-base-100">
+			<div class="container mx-auto px-4">
+				<h2 class="text-4xl font-bold text-center mb-12">How It Works</h2>
+				<div class="grid md:grid-cols-3 gap-8">
+					<div class="card bg-base-100">
+						<div class="card-body">
+							<h3 class="card-title">1. Select Your Interests</h3>
+							<p>Choose tags that match your research topic and interests</p>
+						</div>
+					</div>
+					<div class="card bg-base-100">
+						<div class="card-body">
+							<h3 class="card-title">2. AI Matching</h3>
+							<p>Our custom AI compares your interests with supervisor profiles</p>
+						</div>
+					</div>
+					<div class="card bg-base-100">
+						<div class="card-body">
+							<h3 class="card-title">3. Find Your Match</h3>
+							<p>Get matched with supervisors based on compatibility scores</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Add Pricing Section -->
+		<section id="pricing" class="py-20 bg-base-200">
+			<div class="container mx-auto px-4">
+				<h2 class="text-4xl font-bold text-center mb-12">Pricing</h2>
+				<div class="max-w-3xl mx-auto">
+					<div class="card bg-base-100">
+						<div class="card-body text-center">
+							<span class="material-symbols-rounded text-6xl text-primary mx-auto mb-4">open_source</span>
+							<h3 class="text-2xl font-bold mb-4">Open Source & Free</h3>
+							<p class="text-lg mb-6">SuperWise is an open-source project, available free of charge for educational
+								institutions and students. We believe in making education accessible to everyone.</p>
+							<div class="divider">Setup & Maintenance</div>
+							<p class="text-lg mb-6">While the platform itself is free, we offer professional setup and maintenance
+								services for institutions that need assistance with deployment and ongoing support.</p>
+							<a href="mailto:pricing@superwise.at" class="btn btn-primary btn-lg">
+								<span class="material-symbols-rounded mr-2">mail</span>
+								Contact Us for Setup
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Team Section -->
+		<section id="team" class="py-20 bg-base-100">
+			<div class="container mx-auto px-4">
+				<h2 class="text-4xl font-bold text-center mb-12">Our Team</h2>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<!-- Team Member Cards -->
+					<div class="card bg-base-200 team-card">
+						<figure class="px-10 pt-10">
+							<div class="avatar">
+								<div class="w-48 h-48 rounded-xl bg-primary/10 flex items-center justify-center">
+									<img src="https://api.dicebear.com/7.x/bottts/svg?seed=jonas&backgroundColor=transparent&scale=90"
+											alt="Jonas Beer" class="w-40 h-40" />
+								</div>
+							</div>
+						</figure>
+						<div class="card-body items-center text-center">
+							<h3 class="card-title">Jonas Beer</h3>
+							<p class="text-sm">Project Owner, Frontend Dev</p>
+						</div>
+					</div>
+					<!-- Hesham -->
+					<div class="card bg-base-200 team-card">
+						<figure class="px-10 pt-10">
+							<div class="avatar">
+								<div class="w-48 h-48 rounded-xl bg-primary/10 flex items-center justify-center">
+									<img src="https://api.dicebear.com/7.x/bottts/svg?seed=hesham&backgroundColor=transparent&scale=90"
+											alt="Hesham Alhuraibi" class="w-40 h-40" />
+								</div>
+							</div>
+						</figure>
+						<div class="card-body items-center text-center">
+							<h3 class="card-title">Hesham Alhuraibi</h3>
+							<p class="text-sm">Scrum Master, Lead Frontend Dev</p>
+						</div>
+					</div>
+					<!-- Felix -->
+					<div class="card bg-base-200 team-card">
+						<figure class="px-10 pt-10">
+							<div class="avatar">
+								<div class="w-48 h-48 rounded-xl bg-primary/10 flex items-center justify-center">
+									<img src="https://api.dicebear.com/7.x/bottts/svg?seed=felix&backgroundColor=transparent&scale=90"
+											alt="Felix Teutsch" class="w-40 h-40" />
+								</div>
+							</div>
+						</figure>
+						<div class="card-body items-center text-center">
+							<h3 class="card-title">Felix Teutsch</h3>
+							<p class="text-sm">UI/UX Designer, Frontend Dev</p>
+						</div>
+					</div>
+					<!-- Lena -->
+					<div class="card bg-base-200 team-card">
+						<figure class="px-10 pt-10">
+							<div class="avatar">
+								<div class="w-48 h-48 rounded-xl bg-primary/10 flex items-center justify-center">
+									<img src="https://api.dicebear.com/7.x/bottts/svg?seed=lena&backgroundColor=transparent&scale=90"
+											alt="Lena Stadinger" class="w-40 h-40" />
+								</div>
+							</div>
+						</figure>
+						<div class="card-body items-center text-center">
+							<h3 class="card-title">Lena Stadinger</h3>
+							<p class="text-sm">Test & QU, Frontend Assistive Dev</p>
+						</div>
+					</div>
+					<!-- Bernhard -->
+					<div class="card bg-base-200 team-card">
+						<figure class="px-10 pt-10">
+							<div class="avatar">
+								<div class="w-48 h-48 rounded-xl bg-primary/10 flex items-center justify-center">
+									<img src="https://api.dicebear.com/7.x/bottts/svg?seed=bernhard&backgroundColor=transparent&scale=90"
+											alt="Bernhard Kofler" class="w-40 h-40" />
+								</div>
+							</div>
+						</figure>
+						<div class="card-body items-center text-center">
+							<h3 class="card-title">Bernhard Kofler</h3>
+							<p class="text-sm">Lead Backend Dev</p>
+						</div>
+					</div>
+					<!-- Mohammed -->
+					<div class="card bg-base-200 team-card">
+						<figure class="px-10 pt-10">
+							<div class="avatar">
+								<div class="w-48 h-48 rounded-xl bg-primary/10 flex items-center justify-center">
+									<img src="https://api.dicebear.com/7.x/bottts/svg?seed=mohammed&backgroundColor=transparent&scale=90"
+											alt="Mohammed Alhamadani" class="w-40 h-40" />
+								</div>
+							</div>
+						</figure>
+						<div class="card-body items-center text-center">
+							<h3 class="card-title">Mohammed Alhamadani</h3>
+							<p class="text-sm">Assistive Backend Dev, Data Engineer, Usability Tester</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact Section -->
+		<section id="contact" class="py-20 bg-base-200">
+			<div class="container mx-auto px-4">
+				<h2 class="text-4xl font-bold text-center mb-12">Contact Us</h2>
+				<div class="max-w-2xl mx-auto">
+					<form action="https://formsubmit.co/your-email@domain.com" method="POST" class="card bg-base-100">
+						<div class="card-body">
+							<div class="form-control">
+								<label class="label">
+									<span class="label-text">Name</span>
+								</label>
+								<input type="text" name="name" placeholder="Your name" class="input input-bordered" required />
+							</div>
+							<div class="form-control">
+								<label class="label">
+									<span class="label-text">Email</span>
+								</label>
+								<input type="email" name="email" placeholder="your.email@example.com" class="input input-bordered"
+										required />
+							</div>
+							<div class="form-control">
+								<label class="label">
+									<span class="label-text">Message</span>
+								</label>
+								<textarea name="message" class="textarea textarea-bordered h-24" placeholder="Your message"
+										required></textarea>
+							</div>
+							<div class="form-control mt-6">
+								<button type="submit" class="btn btn-primary">Send Message</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+
+
+		<!-- Footer -->
+		<footer class="footer p-10 bg-base-200 text-base-content">
+			<div>
+				<img src="img/logo/logo_text_horizontal_light.svg" alt="SuperWise Logo" class="h-8 dark:hidden">
+				<img src="img/logo/logo_text_horizontal_dark.svg" alt="SuperWise Logo" class="h-8 hidden dark:block">
+				<p>SuperWise<br />Empowering students with AI since 2024</p>
+			</div>
+			<div class="grid grid-flow-col gap-4">
+				<a href="#about" class="link link-hover">About</a>
+				<a href="#features" class="link link-hover">Features</a>
+				<a href="#how-it-works" class="link link-hover">How it Works</a>
+				<a href="#pricing" class="link link-hover">Pricing</a>
+				<a href="#team" class="link link-hover">Team</a>
+				<a href="#contact" class="link link-hover">Contact</a>
+				<a href="impressum.html" class="link link-hover">Impressum</a>
+			</div>
+			<div>
+				<div class="grid grid-flow-col gap-4">
+					<a href="https://app.superwise.at" class="btn btn-primary">Go to App</a>
+				</div>
+			</div>
+			<div>
+				<p>Copyright © 2024 - SuperWise - All rights reserved</p>
+			</div>
+		</footer>
+
+		<!-- Scripts -->
+		<script src="js/main.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const carousel = document.querySelector('.carousel');
+				const items = carousel.querySelectorAll('.carousel-item');
+				const indicators = carousel.querySelectorAll('.carousel-indicator');
+				const prevBtn = carousel.querySelector('.carousel-prev');
+				const nextBtn = carousel.querySelector('.carousel-next');
+				let currentIndex = 0;
+
+				function showSlide(index) {
+					items.forEach(item => item.classList.add('hidden'));
+					indicators.forEach(indicator => indicator.classList.remove('active'));
+
+					items[index].classList.remove('hidden');
+					indicators[index].classList.add('active');
+					currentIndex = index;
+				}
+
+				function nextSlide() {
+					showSlide((currentIndex + 1) % items.length);
+				}
+
+				function prevSlide() {
+					showSlide((currentIndex - 1 + items.length) % items.length);
+				}
+
+				// Event listeners
+				nextBtn.addEventListener('click', nextSlide);
+				prevBtn.addEventListener('click', prevSlide);
+				indicators.forEach((indicator, index) => {
+					indicator.addEventListener('click', () => showSlide(index));
+				});
+
+				// Auto-advance slides every 5 seconds
+				setInterval(nextSlide, 5000);
+
+				// Touch support for mobile
+				let touchStartX = 0;
+				let touchEndX = 0;
+
+				carousel.addEventListener('touchstart', e => {
+					touchStartX = e.changedTouches[0].screenX;
+				});
+
+				carousel.addEventListener('touchend', e => {
+					touchEndX = e.changedTouches[0].screenX;
+					handleSwipe();
+				});
+
+				function handleSwipe() {
+					const swipeThreshold = 50;
+					if(touchEndX < touchStartX - swipeThreshold) {
+						nextSlide();
+					} else if(touchEndX > touchStartX + swipeThreshold) {
+						prevSlide();
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>

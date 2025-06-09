@@ -1,0 +1,671 @@
+/* Custom styles to complement DaisyUI and Tailwind */
+
+/* Theme transition */
+* {
+	@apply transition-colors duration-300;
+}
+
+/* Section styling */
+section {
+	@apply relative py-20;
+}
+
+section::before {
+	content: '';
+	@apply absolute inset-0 bg-gradient-to-b from-base-200/50 to-transparent opacity-50;
+	z-index: 0;
+}
+
+section > * {
+	@apply relative z-10;
+}
+
+/* Alternating section backgrounds */
+section:nth-child(odd) {
+	@apply bg-base-100;
+}
+
+section:nth-child(even) {
+	@apply bg-base-200;
+}
+
+/* Section headers */
+section h2 {
+	@apply text-4xl font-bold text-center mb-12 relative;
+}
+
+section h2::after {
+	content: '';
+	@apply absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary rounded-full mt-4;
+}
+
+/* Card styling */
+.card {
+	@apply backdrop-blur-sm bg-opacity-90 border border-base-300;
+}
+
+.card-body {
+	@apply p-6;
+}
+
+.card-title {
+	@apply text-xl font-semibold mb-2;
+}
+
+/* Feature cards */
+#features .card {
+	@apply hover:shadow-xl transition-all duration-300;
+}
+
+#features .material-symbols-rounded {
+	@apply text-4xl text-primary mb-4;
+}
+
+/* Pricing section */
+#pricing .card {
+	@apply max-w-3xl mx-auto;
+}
+
+#pricing .divider {
+	@apply my-6;
+}
+
+/* App preview carousel */
+.carousel {
+	@apply relative w-full max-w-4xl mx-auto;
+}
+
+.carousel-item {
+	@apply relative w-full h-[600px] rounded-xl overflow-hidden;
+}
+
+.carousel-item img,
+.carousel-item video {
+	@apply w-full h-full object-cover;
+}
+
+.carousel-controls {
+	@apply absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2;
+}
+
+.carousel-controls button {
+	@apply btn btn-circle btn-sm bg-base-100/80 hover:bg-base-100;
+}
+
+.carousel-indicators {
+	@apply absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2;
+}
+
+.carousel-indicator {
+	@apply w-2 h-2 rounded-full bg-base-100/80 hover:bg-base-100 cursor-pointer;
+}
+
+.carousel-indicator.active {
+	@apply bg-primary;
+}
+
+/* Team section */
+#team .card {
+	@apply hover:shadow-xl transition-all duration-300;
+}
+
+#team .avatar {
+	@apply relative;
+}
+
+#team .avatar > div {
+	@apply transition-all duration-300;
+}
+
+#team .card:hover .avatar > div {
+	@apply bg-primary/20 transform scale-105;
+}
+
+#team img {
+	@apply transition-all duration-300;
+}
+
+#team .card:hover img {
+	@apply transform scale-110;
+}
+
+/* Dark mode specific team styles */
+[data-theme='dark'] #team .avatar > div {
+	@apply bg-primary/5;
+}
+
+[data-theme='dark'] #team .card:hover .avatar > div {
+	@apply bg-primary/30;
+}
+
+/* Contact section */
+#contact .card {
+	@apply max-w-2xl mx-auto;
+}
+
+/* Navigation */
+.navbar {
+	@apply backdrop-blur-md bg-opacity-90 sticky top-0 z-50 px-4;
+}
+
+.navbar a.active {
+	@apply text-primary font-semibold;
+}
+
+/* Footer */
+.footer {
+	@apply backdrop-blur-md bg-opacity-90 border-t border-base-300;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	section {
+		@apply py-16;
+	}
+
+	.carousel-item {
+		@apply h-[400px];
+	}
+
+	#team img {
+		@apply w-32 h-32;
+	}
+}
+
+/* Active state for navigation links */
+.navbar a.active {
+	@apply text-primary font-semibold;
+}
+
+/* Smooth transitions */
+.navbar a,
+.btn,
+.card {
+	@apply transition-all duration-300;
+}
+
+/* Custom hover effects */
+.card:hover {
+	@apply shadow-xl transform -translate-y-2;
+}
+
+/* Custom focus styles */
+input:focus,
+textarea:focus {
+	@apply ring-2 ring-primary ring-opacity-50;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+	@apply w-2;
+}
+
+::-webkit-scrollbar-track {
+	@apply bg-base-200;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply bg-primary rounded-full;
+}
+
+/* Mobile menu animations */
+.dropdown-content {
+	@apply transition-all duration-300 ease-in-out;
+}
+
+.dropdown-open {
+	@apply opacity-100 visible;
+}
+
+/* Hero section background pattern with animation */
+.hero {
+	background-image: radial-gradient(
+			circle at 1px 1px,
+			var(--tw-color-base-300) 1px,
+			transparent 0
+		),
+		linear-gradient(
+			45deg,
+			rgba(var(--tw-color-primary), 0.05) 25%,
+			transparent 25%
+		),
+		linear-gradient(
+			-45deg,
+			rgba(var(--tw-color-primary), 0.05) 25%,
+			transparent 25%
+		);
+	background-size: 40px 40px, 60px 60px, 60px 60px;
+	animation: backgroundMove 20s linear infinite;
+}
+
+@keyframes backgroundMove {
+	0% {
+		background-position: 0 0, 0 0, 0 0;
+	}
+	100% {
+		background-position: 40px 40px, 60px 60px, 60px 60px;
+	}
+}
+
+/* Custom section transitions */
+section {
+	@apply transition-all duration-500;
+}
+
+/* Team member card hover effects */
+.team-card {
+	@apply transition-all duration-300;
+}
+
+.team-card:hover img {
+	@apply scale-110;
+}
+
+.team-card:hover {
+	@apply shadow-2xl;
+}
+
+/* Form input focus effects */
+.form-control input:focus,
+.form-control textarea:focus {
+	@apply border-primary;
+}
+
+/* Custom button hover effects */
+.btn-primary {
+	@apply transform transition-all duration-300 whitespace-nowrap;
+}
+
+.btn-primary:hover {
+	@apply -translate-y-1 shadow-lg scale-105;
+}
+
+.btn-primary.btn-circle {
+	@apply p-2;
+}
+
+.btn-primary.btn-circle .material-symbols-rounded {
+	@apply text-xl;
+}
+
+/* Footer link hover effects */
+.footer a:hover {
+	@apply text-primary transform -translate-y-0.5;
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+	h1 {
+		@apply text-4xl;
+	}
+	h2 {
+		@apply text-3xl;
+	}
+	h3 {
+		@apply text-2xl;
+	}
+}
+
+/* Custom loading animation for form submission */
+.form-loading {
+	@apply opacity-50 pointer-events-none;
+}
+
+.form-loading::after {
+	content: '';
+	@apply absolute inset-0 bg-base-200 opacity-50;
+}
+
+/* Custom focus ring for accessibility */
+*:focus-visible {
+	@apply outline-none ring-2 ring-primary ring-offset-2;
+}
+
+/* Custom selection color */
+::selection {
+	@apply bg-primary text-primary-content;
+}
+
+/* Floating animation for icons */
+@keyframes float {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+.animate-float {
+	animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient text effect */
+.gradient-text {
+	@apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+}
+
+/* Card hover effects with gradient border */
+.card {
+	@apply relative;
+}
+
+.card::before {
+	content: '';
+	@apply absolute inset-0 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-0 transition-opacity duration-300;
+	z-index: -1;
+}
+
+.card:hover::before {
+	@apply opacity-20;
+}
+
+/* Theme toggle button styles */
+.swap {
+	@apply transition-transform duration-300;
+}
+
+.swap-rotate {
+	@apply transition-transform duration-300;
+}
+
+.swap-rotate.swap-active {
+	@apply rotate-180;
+}
+
+/* Dark mode specific styles */
+[data-theme='dark'] .hero {
+	background-image: radial-gradient(
+			circle at 1px 1px,
+			var(--tw-color-base-300) 1px,
+			transparent 0
+		),
+		linear-gradient(
+			45deg,
+			rgba(var(--tw-color-primary), 0.1) 25%,
+			transparent 25%
+		),
+		linear-gradient(
+			-45deg,
+			rgba(var(--tw-color-primary), 0.1) 25%,
+			transparent 25%
+		);
+}
+
+[data-theme='dark'] .card::before {
+	@apply opacity-10;
+}
+
+[data-theme='dark'] .card:hover::before {
+	@apply opacity-30;
+}
+
+/* Custom checkbox and radio styles */
+input[type='checkbox'],
+input[type='radio'] {
+	@apply transition-all duration-200;
+}
+
+input[type='checkbox']:checked,
+input[type='radio']:checked {
+	@apply bg-primary border-primary;
+}
+
+/* Custom tooltip styles */
+[data-tip] {
+	@apply relative;
+}
+
+[data-tip]:before {
+	content: attr(data-tip);
+	@apply absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-base-300 text-base-content rounded text-sm opacity-0 transition-opacity duration-200;
+}
+
+[data-tip]:hover:before {
+	@apply opacity-100;
+}
+
+/* Custom badge styles */
+.badge {
+	@apply transition-all duration-200;
+}
+
+.badge:hover {
+	@apply transform scale-110;
+}
+
+/* Custom divider with gradient */
+.divider {
+	@apply relative;
+}
+
+.divider::before {
+	content: '';
+	@apply absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent opacity-20;
+}
+
+/* Custom link styles */
+.link {
+	@apply transition-all duration-200;
+}
+
+.link:hover {
+	@apply transform -translate-y-0.5;
+}
+
+/* Custom image hover effects */
+img {
+	@apply transition-all duration-300;
+}
+
+img:hover {
+	@apply transform scale-105;
+}
+
+/* Custom section backgrounds */
+.bg-pattern {
+	background-image: radial-gradient(
+			circle at 100% 100%,
+			rgba(var(--tw-color-primary), 0.1) 0%,
+			transparent 50%
+		),
+		radial-gradient(
+			circle at 0% 0%,
+			rgba(var(--tw-color-secondary), 0.1) 0%,
+			transparent 50%
+		);
+}
+
+/* Custom button styles */
+.btn {
+	@apply relative overflow-hidden;
+}
+
+.btn::after {
+	content: '';
+	@apply absolute inset-0 bg-base-content opacity-0 transition-opacity duration-200;
+}
+
+.btn:hover::after {
+	@apply opacity-10;
+}
+
+/* Custom input styles */
+.input,
+.textarea {
+	@apply transition-all duration-200;
+}
+
+.input:focus,
+.textarea:focus {
+	@apply transform -translate-y-0.5;
+}
+
+/* Custom card styles */
+.card {
+	@apply backdrop-blur-sm bg-opacity-90;
+}
+
+/* Custom navigation styles */
+.navbar {
+	@apply backdrop-blur-md bg-opacity-90;
+}
+
+/* Custom footer styles */
+.footer {
+	@apply backdrop-blur-md bg-opacity-90;
+}
+
+/* Logo transition */
+img[alt='SuperWise Logo'] {
+	@apply transition-opacity duration-300;
+}
+
+/* Dark mode specific adjustments */
+[data-theme='dark'] .bg-pattern {
+	background-image: radial-gradient(
+			circle at 100% 100%,
+			rgba(var(--tw-color-primary), 0.15) 0%,
+			transparent 50%
+		),
+		radial-gradient(
+			circle at 0% 0%,
+			rgba(var(--tw-color-secondary), 0.15) 0%,
+			transparent 50%
+		);
+}
+
+[data-theme='dark'] .btn::after {
+	@apply bg-base-100;
+}
+
+[data-theme='dark'] .card {
+	@apply bg-opacity-95;
+}
+
+[data-theme='dark'] .navbar,
+[data-theme='dark'] .footer {
+	@apply bg-opacity-95;
+}
+
+/* Navbar Styles */
+.navbar {
+	@apply px-4;
+}
+
+.navbar-center {
+	@apply flex justify-center items-center;
+}
+
+.navbar-center .btn-ghost {
+	@apply hover:bg-transparent p-2;
+}
+
+.navbar-center .btn-ghost img {
+	@apply h-8 w-8 transition-transform duration-300;
+}
+
+.navbar-center .btn-ghost:hover img {
+	@apply scale-110;
+}
+
+.navbar-center .menu-horizontal {
+	@apply gap-1;
+}
+
+.navbar-center .menu-horizontal li a {
+	@apply px-3 py-2 rounded-lg hover:bg-base-200 dark:hover:bg-base-300 transition-colors;
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 1024px) {
+	.navbar-center {
+		@apply justify-start;
+	}
+
+	.navbar-center .btn-ghost {
+		@apply px-1;
+	}
+
+	.navbar-center .btn-ghost img {
+		@apply h-6;
+	}
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+	@apply opacity-60 hover:opacity-100 transition-opacity duration-300;
+}
+
+.scroll-indicator .material-symbols-rounded {
+	@apply text-2xl;
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(0) translateX(-50%);
+	}
+	50% {
+		transform: translateY(-10px) translateX(-50%);
+	}
+}
+
+.animate-bounce {
+	animation: bounce 2s infinite;
+}
+
+/* Section Highlighting */
+section[id] {
+	scroll-margin-top: 5rem;
+}
+
+/* Highlight the About section when any of its subsections are active */
+section[id='about']:target,
+section[id='features']:target ~ section[id='about'],
+section[id='how-it-works']:target ~ section[id='about'] {
+	@apply relative;
+}
+
+section[id='about']:target::before,
+section[id='features']:target ~ section[id='about']::before,
+section[id='how-it-works']:target ~ section[id='about']::before {
+	content: '';
+	@apply absolute left-0 top-0 w-1 h-full bg-primary;
+}
+
+/* Highlight the active subsection */
+section[id='features']:target,
+section[id='how-it-works']:target {
+	@apply relative;
+}
+
+section[id='features']:target::before,
+section[id='how-it-works']:target::before {
+	content: '';
+	@apply absolute left-0 top-0 w-1 h-full bg-primary/50;
+}
+
+/* Dropdown Menu Styles */
+.menu-horizontal details[open] summary {
+	@apply bg-base-200 dark:bg-base-300;
+}
+
+.menu-horizontal details ul {
+	@apply mt-2 bg-base-100 dark:bg-base-200 shadow-lg rounded-box;
+}
+
+.menu-horizontal details ul li a {
+	@apply whitespace-nowrap hover:bg-base-200 dark:hover:bg-base-300;
+}
+
+.menu-sm details[open] summary {
+	@apply bg-base-200 dark:bg-base-300;
+}
+
+.menu-sm details ul {
+	@apply mt-1;
+}
