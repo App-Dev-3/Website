@@ -102,28 +102,21 @@
 	<body class="min-h-screen bg-base-100 transition-colors duration-300">
 		<!-- Navigation -->
 		<div class="navbar bg-base-100 fixed top-0 z-50 shadow-lg">
-			<div class="navbar-start lg:hidden">
-				<div class="dropdown">
-					<div tabindex="0" role="button" class="btn btn-ghost">
+			<div class="navbar-start">
+				<div class="dropdown dropdown-start lg:hidden">
+					<div tabindex="0" role="button" class="btn btn-ghost btn-circle">
 						<span class="material-symbols-rounded">menu</span>
 					</div>
-					<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-						<li>
-							<details>
-								<summary class="flex items-center gap-2">
-									<span class="material-symbols-rounded">info</span>
-									About
-								</summary>
-								<ul>
-									<li><a href="#about" class="flex items-center gap-2"><span
-													class="material-symbols-rounded">info</span>About</a></li>
-									<li><a href="#pricing" class="flex items-center gap-2"><span
-													class="material-symbols-rounded">payments</span>Pricing</a></li>
-									<li><a href="#team" class="flex items-center gap-2"><span
-													class="material-symbols-rounded">group</span>Team</a></li>
-									<li><a href="#contact" class="flex items-center gap-2"><span
-													class="material-symbols-rounded">mail</span>Contact</a></li>
-								</ul>
+					<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52">
+						<li><a href="#about" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">info</span>About</a></li>
+						<li><a href="#pricing" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">payments</span>Pricing</a></li>
+						<li><a href="#team" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">group</span>Team</a></li>
+						<li><a href="#contact" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">mail</span>Contact</a></li>
+					</ul>
 				</div>
 			</div>
 			<div class="navbar-center flex-1">
@@ -149,12 +142,9 @@
 					<span class="material-symbols-rounded swap-on fill-current">dark_mode</span>
 					<span class="material-symbols-rounded swap-off fill-current">light_mode</span>
 				</button>
-				<a href="#contact" class="btn btn-primary hidden sm:flex items-center gap-2">
+				<a href="#contact" class="btn btn-primary flex items-center gap-2">
 					<span class="material-symbols-rounded">rocket_launch</span>
-					Get Started
-				</a>
-				<a href="#contact" class="btn btn-primary btn-circle sm:hidden">
-					<span class="material-symbols-rounded">rocket_launch</span>
+					<span class="hidden sm:inline">Get Started</span>
 				</a>
 			</div>
 		</div>
