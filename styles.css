@@ -681,3 +681,51 @@ section[id='how-it-works'].active ~ section[id='about']::before {
 .section-content {
 	@apply mx-auto max-w-7xl;
 }
+
+/* Footer Styles */
+footer {
+	@apply relative;
+}
+
+footer::before {
+	content: '';
+	@apply absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/20 via-primary to-primary/20;
+}
+
+footer a {
+	@apply inline-flex items-center;
+}
+
+footer .material-symbols-rounded {
+	@apply text-lg;
+}
+
+footer h3 {
+	@apply text-base-content/90;
+}
+
+footer ul li a {
+	@apply py-1;
+}
+
+footer .bottom-bar {
+	@apply border-t border-base-300;
+}
+
+@media (max-width: 768px) {
+	footer .grid {
+		@apply gap-6;
+	}
+
+	footer .col-span-1.lg\:col-span-2 {
+		@apply text-center;
+	}
+
+	footer .col-span-1.lg\:col-span-2 a {
+		@apply mx-auto;
+	}
+
+	footer .col-span-1.lg\:col-span-2 p {
+		@apply mx-auto;
+	}
+}
