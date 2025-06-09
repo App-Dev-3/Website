@@ -369,11 +369,25 @@ section {
 }
 
 .swap-rotate {
-	@apply transition-transform duration-300;
+	@apply transition-all duration-300;
 }
 
 .swap-rotate.swap-active {
 	@apply rotate-180;
+}
+
+.swap .material-symbols-rounded {
+	@apply transition-opacity duration-300;
+}
+
+.swap .swap-on,
+.swap .swap-off {
+	@apply opacity-0;
+}
+
+.swap.swap-active .swap-on,
+.swap:not(.swap-active) .swap-off {
+	@apply opacity-100;
 }
 
 /* Dark mode specific styles */

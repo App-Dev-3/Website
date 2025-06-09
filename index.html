@@ -23,38 +23,41 @@
 
 		<!-- Theme switcher script -->
 		<script>
+			function setTheme(theme) {
+				if(theme === 'dark') {
+					document.documentElement.setAttribute('data-theme', 'dark');
+					document.querySelectorAll('.swap')
+						.forEach(el => el.classList.add('swap-active'));
+				} else {
+					document.documentElement.setAttribute('data-theme', 'light');
+					document.querySelectorAll('.swap')
+						.forEach(el => el.classList.remove('swap-active'));
+				}
+				localStorage.setItem('theme', theme);
+			}
+
+			function toggleTheme() {
+				const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+				setTheme(isDark ? 'light' : 'dark');
+			}
+
 			// Check for saved theme preference or use system preference
-			const theme = (() => {
-				if(typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
-				}
-				if(window.matchMedia('(prefers-color-scheme: dark)')
-					.matches) {
-					return 'dark';
-				}
-				return 'light';
-			})();
-
-			// Apply theme on load
-			if(theme === 'dark') {
-				document.documentElement.setAttribute('data-theme', 'dark');
-				document.querySelector('link[href*="logo_light.svg"]')
-					.setAttribute('href', 'img/logo/logo_dark.svg');
+			const savedTheme = localStorage.getItem('theme');
+			if(savedTheme) {
+				setTheme(savedTheme);
+			} else {
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
+					.matches;
+				setTheme(prefersDark ? 'dark' : 'light');
 			}
 
-			// Theme toggle function
-			window.toggleTheme = function() {
-				const element = document.documentElement;
-				const isDark = element.getAttribute('data-theme') === 'dark';
-				const newTheme = isDark ? 'light' : 'dark';
-
-				element.setAttribute('data-theme', newTheme);
-				localStorage.setItem('theme', newTheme);
-
-				// Update favicon
-				const favicon = document.querySelector('link[href*="logo_"]');
-				favicon.setAttribute('href', `img/logo/logo_${newTheme}.svg`);
-			}
+			// Listen for system theme changes
+			window.matchMedia('(prefers-color-scheme: dark)')
+				.addEventListener('change', e => {
+					if(!localStorage.getItem('theme')) {
+						setTheme(e.matches ? 'dark' : 'light');
+					}
+				});
 		</script>
 	</head>
 
@@ -105,8 +108,8 @@
 			</div>
 			<div class="navbar-end gap-2">
 				<button onclick="toggleTheme()" class="btn btn-ghost btn-circle swap swap-rotate">
-					<span class="material-symbols-rounded swap-on">dark_mode</span>
-					<span class="material-symbols-rounded swap-off">light_mode</span>
+					<span class="material-symbols-rounded swap-on fill-current">dark_mode</span>
+					<span class="material-symbols-rounded swap-off fill-current">light_mode</span>
 				</button>
 				<a href="#contact" class="btn btn-primary hidden sm:flex items-center gap-2">
 					<span class="material-symbols-rounded">rocket_launch</span>
@@ -513,9 +516,10 @@
 								<span class="material-symbols-rounded">code</span>
 								<span class="sr-only">GitHub</span>
 							</a>
-							<button onclick="toggleTheme()" class="text-base-content/60 hover:text-primary transition-colors">
-								<span class="material-symbols-rounded swap-on">dark_mode</span>
-								<span class="material-symbols-rounded swap-off">light_mode</span>
+							<button onclick="toggleTheme()"
+									class="text-base-content/60 hover:text-primary transition-colors swap swap-rotate">
+								<span class="material-symbols-rounded swap-on fill-current">dark_mode</span>
+								<span class="material-symbols-rounded swap-off fill-current">light_mode</span>
 								<span class="sr-only">Toggle Theme</span>
 							</button>
 						</div>
