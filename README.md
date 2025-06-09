@@ -63,4 +63,4 @@ The website uses:
 
 ## License
 
-Copyright © 2024 SuperWise. All rights reserved.
+Copyright © 2025 SuperWise. All rights reserved.
