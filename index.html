@@ -42,6 +42,29 @@
 							el.classList.remove('swap-active');
 						}
 					});
+
+				// Update logos based on initial theme
+				updateLogos(initialTheme);
+			}
+
+			function updateLogos(theme) {
+				// Update favicon
+				const favicon = document.querySelector('link[rel="icon"]');
+				if(favicon) {
+					favicon.href = `img/logo/logo_${theme}.svg`;
+				}
+
+				// Update all logos
+				const lightLogos = document.querySelectorAll('.theme-logo-light');
+				const darkLogos = document.querySelectorAll('.theme-logo-dark');
+
+				if(theme === 'dark') {
+					lightLogos.forEach(logo => logo.classList.add('hidden'));
+					darkLogos.forEach(logo => logo.classList.remove('hidden'));
+				} else {
+					lightLogos.forEach(logo => logo.classList.remove('hidden'));
+					darkLogos.forEach(logo => logo.classList.add('hidden'));
+				}
 			}
 
 			function setTheme(theme) {
@@ -55,6 +78,7 @@
 						.forEach(el => el.classList.remove('swap-active'));
 				}
 				localStorage.setItem('theme', theme);
+				updateLogos(theme);
 			}
 
 			function toggleTheme() {
@@ -104,8 +128,8 @@
 			</div>
 			<div class="navbar-center flex-1">
 				<a href="/" class="btn btn-ghost px-2">
-					<img src="img/logo/logo_light.svg" alt="SuperWise Logo" class="h-8 dark:hidden">
-					<img src="img/logo/logo_dark.svg" alt="SuperWise Logo" class="h-8 hidden dark:block">
+					<img src="img/logo/logo_light.svg" alt="SuperWise Logo" class="h-8 theme-logo-light">
+					<img src="img/logo/logo_dark.svg" alt="SuperWise Logo" class="h-8 theme-logo-dark hidden">
 				</a>
 				<div class="hidden lg:flex">
 					<ul class="menu menu-horizontal px-1">
@@ -139,9 +163,10 @@
 		<section class="hero min-h-screen bg-base-100 relative">
 			<div class="hero-content text-center">
 				<div class="max-w-md">
-					<img src="img/logo/logo_text_vertical_light.svg" alt="SuperWise Logo" class="mx-auto h-32 dark:hidden mb-8">
+					<img src="img/logo/logo_text_vertical_light.svg" alt="SuperWise Logo"
+							class="mx-auto h-32 theme-logo-light mb-8">
 					<img src="img/logo/logo_text_vertical_dark.svg" alt="SuperWise Logo"
-							class="mx-auto h-32 hidden dark:block mb-8">
+							class="mx-auto h-32 theme-logo-dark hidden mb-8">
 					<h1 class="text-5xl font-bold">Welcome to SuperWise</h1>
 					<p class="py-6">Your AI-powered learning companion that adapts to your unique learning style and helps you
 						achieve your educational goals.</p>
@@ -447,14 +472,14 @@
 		</section>
 
 		<!-- Footer -->
-		<footer class="bg-base-200 py-12">
+		<footer class="bg-base-300 py-12">
 			<div class="container mx-auto px-4">
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 					<!-- Logo and Description -->
 					<div class="col-span-1 lg:col-span-2">
 						<a href="/" class="inline-block mb-4">
-							<img src="img/logo/logo_text_horizontal_light.svg" alt="SuperWise Logo" class="h-8 dark:hidden">
-							<img src="img/logo/logo_text_horizontal_dark.svg" alt="SuperWise Logo" class="h-8 hidden dark:block">
+							<img src="img/logo/logo_text_horizontal_light.svg" alt="SuperWise Logo" class="h-8 theme-logo-light">
+							<img src="img/logo/logo_text_horizontal_dark.svg" alt="SuperWise Logo" class="h-8 theme-logo-dark hidden">
 						</a>
 						<p class="text-base-content/80 max-w-md">
 							Your AI-powered learning companion that adapts to your unique learning style and helps you achieve your
@@ -526,7 +551,8 @@
 							© 2024 SuperWise. All rights reserved.
 						</p>
 						<div class="flex items-center gap-4">
-							<a href="#" class="text-base-content/60 hover:text-primary transition-colors">
+							<a href="https://github.com/App-Dev-3/Superwise" target="_blank" rel="noopener noreferrer"
+									class="text-base-content/60 hover:text-primary transition-colors">
 								<span class="material-symbols-rounded">code</span>
 								<span class="sr-only">GitHub</span>
 							</a>
