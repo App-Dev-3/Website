@@ -272,33 +272,33 @@
 			<div class="container mx-auto px-4">
 				<h2 class="text-4xl font-bold text-center mb-12">App Preview 📱</h2>
 				<div class="max-w-4xl mx-auto">
-					<!-- DaisyUI Phone Mockup -->
-					<div class="flex justify-center">
-						<div class="mockup-phone">
-							<div class="camera"></div>
-							<div class="display">
-								<div class="artboard artboard-demo phone-1 bg-base-100">
-									<div class="carousel-container relative w-full h-full overflow-hidden">
-										<div class="carousel-slides flex w-full h-full transition-transform duration-300"
-												style="transform: translateX(0%)">
-											<div class="carousel-slide flex-none w-full h-full">
-												<img src="img/preview/dashboard.jpeg" alt="SuperWise Dashboard"
-														class="w-full h-full object-cover">
-											</div>
-											<div class="carousel-slide flex-none w-full h-full">
-												<img src="img/preview/matching.jpeg" alt="SuperWise Matching"
-														class="w-full h-full object-cover">
-											</div>
-											<div class="carousel-slide flex-none w-full h-full">
-												<img src="img/preview/profile.jpeg" alt="SuperWise Profile" class="w-full h-full object-cover">
-											</div>
-											<div class="carousel-slide flex-none w-full h-full">
-												<video class="w-full h-full object-cover" autoplay loop muted playsinline>
-													<source src="img/preview/demo.mp4" type="video/mp4">
-													Your browser does not support the video tag.
-												</video>
-											</div>
-										</div>
+					<!-- Custom Phone Frame -->
+					<div class="relative mx-auto w-auto bg-base-300 rounded-3xl shadow-xl p-1.5 border-3 border-base-300">
+						<!-- Power Button -->
+						<div class="absolute -right-1.5 top-1/4 w-0.5 h-6 md:h-8 bg-base-300 rounded-3xl"></div>
+						<!-- Screen Content -->
+						<div class="relative w-full h-full bg-base-100 rounded-[1rem] overflow-hidden rounded-3xl">
+							<div class="carousel-container relative w-full h-full overflow-hidden rounded-3xl">
+								<div class="carousel-slides flex w-full h-full transition-transform duration-300 rounded-3xl"
+										style="transform: translateX(0%)">
+									<div class="carousel-slide flex-none w-full h-full rounded-3xl">
+										<img src="img/preview/dashboard.jpeg" alt="SuperWise Dashboard"
+												class="w-full h-full object-contain rounded-3xl overflow-hidden" onload="adjustPhoneSize(this)">
+									</div>
+									<div class="carousel-slide flex-none w-full h-full rounded-3xl">
+										<img src="img/preview/matching.jpeg" alt="SuperWise Matching"
+												class="w-full h-full object-contain rounded-3xl overflow-hidden" onload="adjustPhoneSize(this)">
+									</div>
+									<div class="carousel-slide flex-none w-full h-full rounded-3xl">
+										<img src="img/preview/profile.jpeg" alt="SuperWise Profile"
+												class="w-full h-full object-contain rounded-3xl overflow-hidden" onload="adjustPhoneSize(this)">
+									</div>
+									<div class="carousel-slide flex-none w-full h-full rounded-3xl">
+										<video class="w-full h-full object-contain" autoplay loop muted playsinline
+												onloadedmetadata="adjustPhoneSize(this)">
+											<source src="img/preview/demo.mp4" type="video/mp4">
+											Your browser does not support the video tag.
+										</video>
 									</div>
 								</div>
 							</div>
@@ -315,6 +315,14 @@
 								onclick="goToSlide(2)"></button>
 						<button class="indicator-btn btn btn-circle btn-outline btn-accent btn-xs transition-all duration-300"
 								onclick="goToSlide(3)"></button>
+					</div>
+
+					<!-- Preview Description -->
+					<div class="mt-8 text-center">
+						<p class="text-lg text-base-content/80 max-w-2xl mx-auto">
+							Experience SuperWise in action! Swipe through our app preview to see how we make finding your perfect
+							thesis supervisor effortless and enjoyable. 🎯
+						</p>
 					</div>
 				</div>
 			</div>
@@ -653,6 +661,50 @@
 			document.addEventListener('DOMContentLoaded', () => {
 				goToSlide(0);
 			});
+
+			function adjustPhoneSize(element) {
+				const phoneFrame = element.closest('.carousel-container')
+					.parentElement.parentElement;
+				const aspectRatio = 9 / 19.5;
+				const maxHeight = window.innerHeight * 0.8; // 80vh
+				const maxWidth = 280; // Maximum width in pixels
+
+				// Get the natural dimensions of the content
+				const contentWidth = element.naturalWidth || element.videoWidth;
+				const contentHeight = element.naturalHeight || element.videoHeight;
+
+				// Calculate the height based on content while maintaining aspect ratio
+				let height = Math.min(contentHeight, maxHeight);
+				let width = height * aspectRatio;
+
+				// If width exceeds maxWidth, scale down proportionally
+				if(width > maxWidth) {
+					width = maxWidth;
+					height = width / aspectRatio;
+				}
+
+				// Apply the dimensions
+				phoneFrame.style.width = `${width}px`;
+				phoneFrame.style.height = `${height}px`;
+			}
+
+			// Adjust size on window resize
+			window.addEventListener('resize', () => {
+				const activeSlide = document.querySelector('.carousel-slide:not([style*="transform"])');
+				if(activeSlide) {
+					const content = activeSlide.querySelector('img, video');
+					if(content) adjustPhoneSize(content);
+				}
+			});
+
+			// Initial size adjustment
+			document.addEventListener('DOMContentLoaded', () => {
+				const firstSlide = document.querySelector('.carousel-slide');
+				if(firstSlide) {
+					const content = firstSlide.querySelector('img, video');
+					if(content) adjustPhoneSize(content);
+				}
+			});
 		</script>
 
 		<!-- Section Highlighting Script -->
@@ -689,242 +741,28 @@
 		</script>
 
 		<style>
-			/* Add smooth scrolling to carousel */
-			.carousel {
-				scroll-behavior: smooth;
-				-webkit-overflow-scrolling: touch;
-				overscroll-behavior: none;
-				touch-action: pan-x;
+			/* Custom phone frame styles */
+			.phone-frame {
+				@apply relative mx-auto bg-base-300 rounded-3xl shadow-xl p-1.5 border-3 border-base-300;
+				transition: width 0.3s ease, height 0.3s ease;
 			}
 
-			/* Hide scrollbar but keep functionality */
-			.carousel::-webkit-scrollbar {
-				display: none;
+			/* Screen content styles */
+			.screen-content {
+				@apply relative w-full h-full bg-base-100 rounded-[1rem] overflow-hidden;
 			}
 
-			.carousel {
-				-ms-overflow-style: none;
-				scrollbar-width: none;
+			/* Power button styles */
+			.power-button {
+				@apply absolute -right-1.5 top-1/4 w-0.5 h-6 md: h-8 bg-base-300 rounded-r-lg;
 			}
 
-			/* Ensure images and videos maintain aspect ratio */
-			.carousel-item img,
-			.carousel-item video {
-				object-fit: cover;
-				width: 100%;
-				height: 100%;
-			}
-
-			/* Adjust phone mockup size if needed */
-			.mockup-phone {
-				--phone-size: 320px;
-				width: var(--phone-size);
-				height: calc(var(--phone-size) * 2);
-			}
-
-			.mockup-phone .artboard {
-				width: 100%;
-				height: 100%;
-			}
-
-			/* Navigation button styles */
-			.btn-circle.btn-ghost {
-				@apply bg-base-100/80 hover: bg-base-200 dark:bg-base-200/80 dark:hover:bg-base-300;
-			}
-
-			/* Carousel container for proper centering */
-			.relative {
-				@apply flex flex-col items-center;
-			}
-
-			/* Indicator styles */
-			.btn-circle.btn-sm {
-				@apply w-3 h-3 min-h-0 p-0;
-			}
-
-			.btn-circle.btn-sm.btn-primary {
-				@apply bg-primary;
-			}
-
-			.btn-circle.btn-sm:not(.btn-primary) {
-				@apply bg-base-300 hover: bg-base-400;
-			}
-
-			/* Navbar Styles */
-			.navbar {
-				@apply px-4 backdrop-blur-md bg-opacity-90 sticky top-0 z-50;
-			}
-
-			.navbar-center {
-				@apply flex justify-center items-center;
-			}
-
-			.navbar-center .btn-ghost {
-				@apply hover: bg-transparent;
-			}
-
-			.navbar-center .btn-ghost img {
-				@apply h-8 transition-transform duration-300;
-			}
-
-			.navbar-center .btn-ghost:hover img {
-				@apply scale-110;
-			}
-
-			/* Desktop Menu Styles */
-			@media (min-width: 1024px) {
-				.navbar {
-					@apply py-0;
-				}
-
-				.navbar-center {
-					@apply flex-1;
-				}
-
-				.navbar-end {
-					@apply flex-none;
-				}
-
-				.navbar-end .menu {
-					@apply flex-row gap-1;
-				}
-
-				.navbar-end .menu li a {
-					@apply px-3 py-2 rounded-lg hover: bg-base-200 dark:hover:bg-base-300 transition-colors;
-				}
-			}
-
-			/* Mobile Menu Styles */
-			@media (max-width: 1024px) {
-				.navbar {
-					@apply py-2;
-				}
-
-				.navbar-center {
-					@apply flex-none;
-				}
-
-				/* Burger Menu Styles */
-				.dropdown .btn-ghost {
-					@apply hover: bg-base-200 dark:hover:bg-base-300;
-				}
-
-				.dropdown .material-symbols-rounded {
-					@apply text-2xl;
-				}
-
-				.dropdown-content {
-					@apply mt-2;
-				}
-
-				.dropdown-content .menu {
-					@apply bg-base-100 dark: bg-base-200 shadow-lg rounded-box;
-				}
-
-				.dropdown-content .menu li a {
-					@apply px-4 py-3 hover: bg-base-200 dark:hover:bg-base-300;
-				}
-
-				.dropdown-content .menu li a .material-symbols-rounded {
-					@apply text-xl;
-				}
-
-				/* Adjust hero section padding for mobile navbar */
-				.hero {
-					@apply pt-24;
-				}
-			}
-
-			/* Active state for navigation links */
-			.navbar a.active {
-				@apply text-primary font-semibold bg-base-200 dark: bg-base-300;
-			}
-
-			/* Smooth transitions */
-			.navbar a,
-			.btn {
-				@apply transition-all duration-300;
-			}
-
-			/* Custom hover effects */
-			.navbar .btn-ghost:hover {
-				@apply bg-base-200 dark: bg-base-300;
-			}
-
-			.navbar .btn-primary {
-				@apply transform transition-all duration-300;
-			}
-
-			.navbar .btn-primary:hover {
-				@apply -translate-y-1 shadow-lg;
-			}
-
-			/* Logo transition */
-			.navbar img[alt='SuperWise Logo'] {
-				@apply transition-opacity duration-300;
-			}
-
-			/* Dropdown animation */
-			.dropdown-content {
-				@apply transition-all duration-200 ease-out;
-				transform-origin: top left;
-			}
-
-			.dropdown-content[data-state="open"] {
-				@apply opacity-100 scale-100;
-			}
-
-			.dropdown-content[data-state="closed"] {
-				@apply opacity-0 scale-95;
-			}
-
-			/* Carousel indicator styles */
-			.indicator-btn {
-				@apply transition-all duration-300;
-			}
-
-			.indicator-btn.btn-md {
-				@apply w-4 h-4 min-h-0 p-0;
-			}
-
-			.indicator-btn.btn-sm {
-				@apply w-3 h-3 min-h-0 p-0;
-			}
-
-			.indicator-btn.btn-outline {
-				@apply border-2;
-			}
-
-			/* Ensure smooth transitions */
-			.indicator-btn {
-				@apply transform transition-all duration-300;
-			}
-
-			/* Hover effects */
-			.indicator-btn.btn-outline:hover {
-				@apply scale-110;
-			}
-
-			.indicator-btn.btn-primary:hover {
-				@apply shadow-lg;
-			}
-
-			/* Prevent carousel from getting stuck */
-			.carousel {
-				scroll-behavior: smooth;
-				-webkit-overflow-scrolling: touch;
-				overscroll-behavior: none;
-				touch-action: pan-x;
-			}
-
-			/* Ensure carousel items take full width */
-			.carousel-item {
-				@apply flex-none w-full h-full;
-			}
-
-			/* Prevent text selection during swipe */
-			.carousel * {
-				@apply select-none;
+			/* Shadow and depth effects */
+			.phone-frame {
+				box-shadow:
+					0 0 0 1px rgba(0, 0, 0, 0.1),
+					0 0 0 2px rgba(0, 0, 0, 0.1),
+					0 0 0 3px rgba(0, 0, 0, 0.1);
 			}
 
 			/* Carousel container */
@@ -943,9 +781,10 @@
 				@apply flex-none w-full h-full;
 			}
 
-			/* Prevent text selection */
-			.carousel-container * {
-				@apply select-none;
+			/* Image and video styles */
+			.carousel-slide img,
+			.carousel-slide video {
+				@apply w-full h-full object-contain bg-base-100;
 			}
 
 			/* Indicator styles */
