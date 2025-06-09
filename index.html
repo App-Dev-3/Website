@@ -595,9 +595,14 @@
 				<!-- Bottom Bar -->
 				<div class="border-t border-base-300 mt-8 pt-8">
 					<div class="flex flex-col md:flex-row justify-between items-center gap-4">
-						<p class="text-base-content/60 text-sm">
-							© 2024 SuperWise. All rights reserved.
-						</p>
+						<div class="flex items-center gap-4">
+							<p class="text-base-content/60 text-sm">
+								© 2024 SuperWise. All rights reserved.
+							</p>
+							<a href="data-protection.html" class="text-base-content/60 hover:text-primary transition-colors text-sm">
+								Data Protection
+							</a>
+						</div>
 						<div class="flex items-center gap-4">
 							<a href="https://github.com/App-Dev-3/Superwise" target="_blank" rel="noopener noreferrer"
 									class="text-base-content/60 hover:text-primary transition-colors">
@@ -807,6 +812,15 @@
 
 			.indicator-btn.btn-primary:hover {
 				@apply shadow-lg;
+			}
+
+			/* Footer link styles */
+			.footer .link {
+				@apply text-base-content/80 hover: text-primary transition-colors duration-300;
+			}
+
+			.footer .link-hover:hover {
+				@apply text-primary;
 			}
 		</style>
 	</body>
