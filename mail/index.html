@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Thank You | SuperWise</title>
+		<meta name="description" content="Thank you for contacting SuperWise. We will get back to you soon.">
+		<!-- Favicon -->
+		<link rel="icon" type="image/svg+xml" href="../img/logo/logo_light.svg" media="(prefers-color-scheme: light)">
+		<link rel="icon" type="image/svg+xml" href="../img/logo/logo_dark.svg" media="(prefers-color-scheme: dark)">
+		<!-- DaisyUI and Tailwind -->
+		<link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet"
+				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+		<!-- Custom styles -->
+		<link href="../styles.css" rel="stylesheet">
+		<!-- Theme Switcher Script (copied from index.html) -->
+		<script>
+			function initializeTheme() {
+				const savedTheme = localStorage.getItem('theme');
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
+					.matches;
+				const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+				document.documentElement.setAttribute('data-theme', initialTheme);
+				document.querySelectorAll('.swap')
+					.forEach(el => {
+						if(initialTheme === 'dark') {
+							el.classList.add('swap-active');
+						} else {
+							el.classList.remove('swap-active');
+						}
+					});
+				updateLogos(initialTheme);
+			}
+
+			function updateLogos(theme) {
+				const favicon = document.querySelector('link[rel="icon"]');
+				if(favicon) {
+					favicon.href = `../img/logo/logo_${theme}.svg`;
+				}
+				const lightLogos = document.querySelectorAll('.theme-logo-light');
+				const darkLogos = document.querySelectorAll('.theme-logo-dark');
+				if(theme === 'dark') {
+					lightLogos.forEach(logo => logo.classList.add('hidden'));
+					darkLogos.forEach(logo => logo.classList.remove('hidden'));
+				} else {
+					lightLogos.forEach(logo => logo.classList.remove('hidden'));
+					darkLogos.forEach(logo => logo.classList.add('hidden'));
+				}
+			}
+
+			function setTheme(theme) {
+				if(theme === 'dark') {
+					document.documentElement.setAttribute('data-theme', 'dark');
+					document.querySelectorAll('.swap')
+						.forEach(el => el.classList.add('swap-active'));
+				} else {
+					document.documentElement.setAttribute('data-theme', 'light');
+					document.querySelectorAll('.swap')
+						.forEach(el => el.classList.remove('swap-active'));
+				}
+				localStorage.setItem('theme', theme);
+				updateLogos(theme);
+			}
+
+			function toggleTheme() {
+				const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+				setTheme(isDark ? 'light' : 'dark');
+			}
+			document.addEventListener('DOMContentLoaded', initializeTheme);
+			window.matchMedia('(prefers-color-scheme: dark)')
+				.addEventListener('change', e => {
+					if(!localStorage.getItem('theme')) {
+						setTheme(e.matches ? 'dark' : 'light');
+					}
+				});
+		</script>
+	</head>
+
+	<body class="min-h-screen bg-base-100 transition-colors duration-300 flex flex-col">
+		<!-- Navigation -->
+		<div class="navbar bg-base-100 fixed top-0 z-50 shadow-lg">
+			<div class="navbar-start">
+				<div class="dropdown dropdown-start lg:hidden">
+					<div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+						<span class="material-symbols-rounded">menu</span>
+					</div>
+					<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52">
+						<li><a href="../#about" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">info</span>About</a></li>
+						<li><a href="../#pricing" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">payments</span>Pricing</a></li>
+						<li><a href="../#team" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">group</span>Team</a></li>
+						<li><a href="../#contact" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">mail</span>Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="navbar-center gap-2">
+				<a href="../" class="btn btn-ghost px-2">
+					<img src="../img/logo/logo_light.svg" alt="SuperWise Logo" class="h-8 theme-logo-light">
+					<img src="../img/logo/logo_dark.svg" alt="SuperWise Logo" class="h-8 theme-logo-dark hidden">
+				</a>
+				<div class="hidden lg:flex">
+					<ul class="menu menu-horizontal px-1">
+						<li><a href="../#about" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">info</span>About</a></li>
+						<li><a href="../#pricing" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">payments</span>Pricing</a></li>
+						<li><a href="../#team" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">group</span>Team</a></li>
+						<li><a href="../#contact" class="flex items-center gap-2"><span
+										class="material-symbols-rounded">mail</span>Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="navbar-end gap-2">
+				<button onclick="toggleTheme()" class="btn btn-ghost btn-circle swap swap-rotate">
+					<span class="material-symbols-rounded swap-on fill-current">dark_mode</span>
+					<span class="material-symbols-rounded swap-off fill-current">light_mode</span>
+				</button>
+				<a href="https://app.superwise.at/" class="btn btn-primary flex items-center gap-2">
+					<span class="material-symbols-rounded">rocket_launch</span>
+					<span class="hidden sm:inline">Get Started</span>
+				</a>
+			</div>
+		</div>
+		<!-- Main Content -->
+		<main class="flex-grow flex items-center justify-center">
+			<section class="w-full flex items-center justify-center min-h-screen bg-base-100 pt-24 pb-16">
+				<div class="max-w-xl w-full mx-auto">
+					<div class="card bg-base-100 shadow-xl">
+						<div class="card-body items-center text-center">
+							<img src="../img/logo/logo_text_vertical_light.svg" alt="SuperWise Logo"
+									class="mx-auto h-24 mb-6 theme-logo-light">
+							<img src="../img/logo/logo_text_vertical_dark.svg" alt="SuperWise Logo"
+									class="mx-auto h-24 mb-6 theme-logo-dark hidden">
+							<h1 class="text-4xl font-bold mb-4">Thank You!</h1>
+							<p class="text-lg mb-6">Your message has been sent successfully.<br>We appreciate your interest and will
+								get back to you as soon as possible.</p>
+							<a href="../" class="btn btn-primary flex items-center gap-2">
+								<span class="material-symbols-rounded">arrow_back</span>
+								Back to Home
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<!-- Footer -->
+		<footer class="bg-base-300 py-12 mt-auto">
+			<div class="container mx-auto px-4">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+					<!-- Logo and Description -->
+					<div class="col-span-1 lg:col-span-2">
+						<a href="../" class="inline-block mb-4">
+							<img src="../img/logo/logo_text_horizontal_light.svg" alt="SuperWise Logo" class="h-8 theme-logo-light">
+							<img src="../img/logo/logo_text_horizontal_dark.svg" alt="SuperWise Logo"
+									class="h-8 theme-logo-dark hidden">
+						</a>
+						<p class="text-base-content/80 max-w-md">
+							Your AI-powered learning companion that adapts to your unique learning style and helps you achieve your
+							educational goals.
+						</p>
+					</div>
+					<!-- Quick Links -->
+					<div>
+						<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+						<ul class="space-y-2">
+							<li>
+								<a href="../#about"
+										class="text-base-content/80 hover:text-primary transition-colors flex items-center gap-2">
+									<span class="material-symbols-rounded text-sm">info</span>
+									About
+								</a>
+							</li>
+							<li>
+								<a href="../#pricing"
+										class="text-base-content/80 hover:text-primary transition-colors flex items-center gap-2">
+									<span class="material-symbols-rounded text-sm">payments</span>
+									Pricing
+								</a>
+							</li>
+							<li>
+								<a href="../#team"
+										class="text-base-content/80 hover:text-primary transition-colors flex items-center gap-2">
+									<span class="material-symbols-rounded text-sm">group</span>
+									Team
+								</a>
+							</li>
+							<li>
+								<a href="../#contact"
+										class="text-base-content/80 hover:text-primary transition-colors flex items-center gap-2">
+									<span class="material-symbols-rounded text-sm">mail</span>
+									Contact
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- Contact Info -->
+					<div>
+						<h3 class="text-lg font-semibold mb-4">Contact</h3>
+						<ul class="space-y-2">
+							<li>
+								<a href="mailto:contact@superwise.at"
+										class="text-base-content/80 hover:text-primary transition-colors flex items-center gap-2">
+									<span class="material-symbols-rounded text-sm">mail</span>
+									contact@superwise.at
+								</a>
+							</li>
+							<li>
+								<a href="mailto:pricing@superwise.at"
+										class="text-base-content/80 hover:text-primary transition-colors flex items-center gap-2">
+									<span class="material-symbols-rounded text-sm">payments</span>
+									pricing@superwise.at
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- Bottom Bar -->
+				<div class="border-t border-base-300 mt-8 pt-8">
+					<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+						<div class="flex flex-col md:flex-row items-center gap-4">
+							<p class="text-base-content/60 text-sm">© 2025 SuperWise. All rights reserved.</p>
+							<div class="flex flex-col md:flex-row items-center gap-4 underline">
+								<a href="../data-protection/"
+										class="text-base-content/60 hover:text-primary transition-colors text-sm">Data Protection</a>
+								<a href="../impressum/"
+										class="text-base-content/60 hover:text-primary transition-colors text-sm">Impressum</a>
+							</div>
+						</div>
+						<div class="flex items-center gap-4">
+							<a href="https://github.com/App-Dev-3/Superwise" target="_blank" rel="noopener noreferrer"
+									class="text-base-content/60 hover:text-primary transition-colors">
+								<span class="material-symbols-rounded">code</span>
+								<span class="sr-only">GitHub</span>
+							</a>
+							<button onclick="toggleTheme()"
+									class="text-base-content/60 hover:text-primary transition-colors swap swap-rotate">
+								<span class="material-symbols-rounded swap-on fill-current">dark_mode</span>
+								<span class="material-symbols-rounded swap-off fill-current">light_mode</span>
+								<span class="sr-only">Toggle Theme</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+
+</html>
